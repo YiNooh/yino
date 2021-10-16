@@ -1,0 +1,31 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 300,
+    "height": 100,
+    "data": {
+      "url": "https://raw.githubusercontent.com/Yino111/yino/main/income_level_area/data/income_level.csv"},
+      "config": {
+        "view": {
+            "strokeWidth": 0,
+            "step": 13
+        },
+        "axis": {
+            "domain": false
+        }
+    },
+      "mark": "rect",
+    "encoding": {
+      "x": {"field": "Year", "type": "ordinal"},
+      "color": {
+        "aggregate": "sum",
+        "field": "Consumption",
+        "type": "quantitative",
+        "title": "alcohol consumption per capita (liters)"
+      },
+      "y": {
+        "field": "income_level",
+        "type": "nominal",
+        "title": null
+      }
+    }
+  }
