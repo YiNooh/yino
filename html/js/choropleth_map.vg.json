@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {"text": ["Total alcohol consumption per capital (15+ years of age) in 2018"],
+  "fontSize":17,
+  "anchor": "middle",
+  "color":"#c5a516c2"
+  },
+  "width": 800,
+  "height": 350,
+  "background": "#fcf9f0",
+  "projection": {"type": "equirectangular"},
+ "data": {
+      "url": "https://raw.githubusercontent.com/Yino111/yino/main/alcohol_consumption_map/js/world.geo.json",
+    "format": {"type": "topojson", "feature": "world.geo"}
+  },
+  "layer":[
+    {
+      "transform": [
+        {"calculate": "'Data is not available in ' + datum.properties.name", "as": "note"}
+      ],
+      "mark": {"type": "geoshape", "fill": "#e4e4e0", "stroke": "white"},
+      "encoding": {
+        "tooltip": {"field": "note"}
+      }},
+      {
+     "transform": [
+    {
+      "lookup": "properties.name",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Yino111/yino/main/alcohol_consumption_map/data/2018_alcohol_consumption_data.csv"
+        },
+        "key": "Country",
+        "fields": ["Consumption"]
+      }
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke":"white"},
+  "encoding": {
+    "color": {
+      "field": "Consumption",
+      "type": "quantitative",
+      "scale": { "type": "threshold", "domain": [2, 4, 6, 8, 10, 12, 15, 21], 
+      "range": ["#f9e6ad", "#f5d46f", "#f4d062", "#f3c94a", "#e1ad0f", "#c09b28", "#a88723", "#786119"] } },
+      "tooltip": [
+        {"field": "properties.name", "type": "nominal", "title": "Country"},
+        {"field": "Consumption", "type": "quantitative"}
+    ]
+  }
+        } 
+  ]
+}

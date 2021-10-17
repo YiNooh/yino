@@ -1,0 +1,34 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {"text": ["Total alcohol consumption per capita by income level from 2000 to 2018"],
+    "fontSize":17,
+    "anchor": "middle",
+    "color":"#c5a516c2"
+    },
+    "background": "#fcf9f0",
+    "width": 500,
+    "height": 300,
+    "data": {
+      "url": "https://raw.githubusercontent.com/Yino111/yino/main/3179_assignment2%20/data/Income_level.csv"},
+      "mark": "rect", 
+    "encoding": {
+      "x": {"field": "Year", "type": "ordinal"},
+      "color": {
+        "aggregate": "sum",
+        "field": "Consumption",
+        "type": "quantitative",
+        "title": "consumption per capita (liters)",
+        "scale": {"domain": [2, 4, 5, 6, 7, 8, 9, 10, 11], 
+        "range": ["#f9f1c2", "#f5d46f", "#f4d062", "#f3c94a", "#e1ad0f", "#c09b28", "#a88723", "#786119"] }
+      },
+      "y": {
+        "field": "income_level",
+        "type": "nominal",
+        "title": null, "sort": "-x"
+      },
+      "tooltip": [ {"field": "income_level", "type": "nominal"}, 
+      {"field": "Year", "type": "quantitative", "format": ","}, 
+      {"field": "Consumption", "type": "quantitative", "format": ".2f"}
+      ]
+    }
+  }
