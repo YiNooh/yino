@@ -1,0 +1,32 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Yino111/yino/main/3179_assignment2%20/data/type_au.csv"
+  },
+  "title": {"text": ["Alcohol recorded per capita consumption (in litres of pure alcohol) - Beverage Types"],
+  "fontSize":17,
+  "anchor": "middle",
+  "color":"#c5a516c2"
+  },
+  "background": "#fcf9f0",
+  "width": 750,
+  "height": 300,
+  
+  "mark": "area",
+  "encoding": {
+    "x":  {
+      "timeUnit": "year", "field": "year",
+      "axis": {"format": "%Y"}
+    },
+    "y": {"aggregate": "sum", "field": "consumption"
+    },
+    "color": {"field": "type", "type": "nominal", "legend": null,
+    "scale": {
+      "domain": ["beer", "wine", "spirits"],
+    "range": [ "#bdb566", "#e7d953", "#f0e896"]}},
+    "tooltip": [ 
+      {"field": "type", "type": "nominal"}, 
+      {"field": "consumption", "type": "quantitative", "format": ".2f"}
+      ]
+  }
+  }

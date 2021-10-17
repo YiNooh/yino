@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Golbal Alcohol Consumption</title>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Play&family=Prosto+One&display=swap" rel="stylesheet">
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="styles.css" media="all">
+
+
+</head>
+<body>
+
+ <div class="page">
+
+   <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>The Golbal Alcohol Consumption</h1>
+        <p>With global consumption levels increasing, we are interesting in the global picture of alcohol consumption.
+          This visualisation focuses on global individual alcohol consumption, the relationship between individual alcohol consumption and GDP per capita, 
+          and premature deaths rate due to alcohol consumption in different countries.
+        </p>
+      </div>
+    </div>
+  <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+        <div class="pure-u-1-3">
+          <div class="description description-left">
+            <h2>Global alcohol consumption</h2>
+            <p>The choropleth map displays the global individual alcohol consumption in 2018.</p>
+            <p>Typically, people in Europe region drink alcohol more than other continents.
+              In contrast, alcohol consumption is generally much lower in Africa region.
+               </p>
+          </div>
+        </div>
+        <div class="pure-u-2-3">
+          <div id="vis1" class="vis-container"></div>
+        </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+        <div class="pure-u-2-3">
+          <div id="vis2"  class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-3">
+          <div class="description description-right">
+            <h2>Types of alcohol in Australia</h2>
+            <p>Australia is a heavy alcohol consumption country, where we know from the map that  Australia people consumed total 10.51 litres per capita in 2018.
+               </p>
+               <p>In this area chart showing, beer is the most popular choice of alcohol. Australians consumed the most volum of alcohol per capita from 1970 to 1986 and has declined each year since. One of the reason for this may be that people became health-conscious.
+              </p>
+              
+          </div>
+        </div>
+      
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>Alcohol consumption vs. income</h2>
+          <p>Right side chart tells us that there is a positive relationship between alcohol consumption per capita and income level.
+            That is, where the region has a higher income level, the greater alcohol consumed.</p>
+            <p>Interestingly, alcohol consumption among high income groups is declining year by year, while middle income groups are consuming more and more  over years.</p>
+          
+        </div>
+      </div>
+      <div class="pure-u-2-3">
+        <div id="vis3"  class="vis-container"></div>
+      </div>
+    
+    </div>
+    <!-- end pure grid group -->
+  
+        <!-- pure grid group -->
+        <div class="pure-g">
+          <div class="pure-u-2-3">
+            <div id="vis4"  class="vis-container"></div>
+          </div>
+          <div class="pure-u-1-3">
+            <div class="description description-right">
+              <h2>Alcohol consumption vs. GDP</h2>
+              <p>The scatter plot chart shows that in generally, the more GDP per capita increases, the more alcohol is consumed. And while GDP per capita is generally low in Africa, alcohol consumption does not decrease because of low GDP.</p>
+            </div>
+          </div>
+
+       <!-- pure grid group -->
+       <div class="pure-g">
+        <div class="pure-u-1-3">
+          <div class="description description-left">
+            <h2>Alcohol-attributable fraction of mortality</h2>
+            <p>The bar chart shows that the global alcohol-attributable fraction of martality in 2012.
+              </p>
+            <p>Belarus has the highest Alcohol-attributable fraction of death in the world (34.7%) compared to other factors leading to premature deaths.
+              While Niger has the lowest AAF of death in the world.</p>
+          </div>
+        </div>
+        <div class="pure-u-2-3">
+          <div id="vis5"  class="vis-container"></div>
+        </div>
+      
+      </div>
+      <!-- end pure grid group -->     
+      </div>
+      <!-- end pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1 small-font">
+        <p>This visualisation is created by <a href="https://github.com/Yino111"  target="_blank">YiNo</a>.</p>
+      </div>
+    </div>
+  
+
+  </div> <!-- end page -->
+   
+<script type="text/javascript">
+  var specVis1= "./choropleth_map.vg.json";
+  var specVis2= "./bar_chart_au.vg.json"; 
+  var specVis3= "./area_chart.vg.json";
+  var specVis4= "./scatter_plot_interactive.vg.json";
+  var specVis5= "./alcohol_mortality_bar.vg.json";
+  var specVis6= "./death_rate_area.vg.json";
+  
+
+  vegaEmbed('#vis1', specVis1, {"actions": false}).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  
+   vegaEmbed('#vis2', specVis2, {"actions": false}).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  vegaEmbed('#vis3', specVis3, {"actions": false}).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  vegaEmbed('#vis4', specVis4, {"actions": false}).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  vegaEmbed('#vis5', specVis5, {"actions": false}).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+
+
+</script>
+</body>
+</html>

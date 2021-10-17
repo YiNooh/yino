@@ -1,0 +1,49 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {"text": ["Alcohol-attributable fraction (%) of mortality in 2012"],
+    "fontSize":17,
+    "anchor": "middle",
+    "color":"#c5a516c2"
+    },
+    "background": "#fcf9f0",
+    "width": 800,
+    "height": 400,
+    "data": { "url": "https://raw.githubusercontent.com/Yino111/yino/main/alcohol_mortality_bar/alcohol_mortality.csv" },
+    "mark": { "type": "bar", "fill": "#e7c21b"},
+    "encoding": {
+        "x": { "aggregate": "sum", "field": "death_rate", "title":  null }, 
+        "y": { "field": "country", "type": "nominal", "sort": "-x"},
+        "tooltip": [ {"field": "country", "type": "nominal"}, 
+        {"field": "year", "type": "quantitative", "format": ","}, 
+        {"field": "death_rate", "type": "quantitative", "format": ","}
+      ]
+    },
+    "layer": [{
+      "mark": "bar",
+      "encoding": {
+        "color": {
+          "field": "death_rate",
+          "type": "quantitative",
+          "title": "AAF (%)"
+        }
+      }
+    }, {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "xOffset": -1,
+        "aria": false
+      },
+      "encoding": {
+        "text": {"field": "death_rate", "type": "quantitative"},
+        "color": {
+          "condition": {
+            "test": {"field": "death_rate", "gt": 10},
+            "value": "white"
+          },
+          "value": "black"
+        }
+      }
+    }]
+}
+

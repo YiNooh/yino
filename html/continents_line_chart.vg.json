@@ -1,0 +1,33 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Yino111/yino/main/continents_line_chart.csv"
+  },
+  "title": {"text": ["Alcohol consumption per capita among continents"],
+  "fontSize":17,
+  "anchor": "middle",
+  "color":"#c5a516c2"
+  },
+  "background": "#fcf9f0",
+  "width": 750,
+  "height": 300,
+  
+  "mark": {
+    "type": "line",
+    "point": true
+  },
+  "encoding": {
+    "x":  {
+      "timeUnit": "year", "field": "year"
+     
+    },
+    "y": {"aggregate": "sum", "field": "consumption", "type": "quantitative"
+    },
+    "color": {"field": "continent", "type": "nominal", "legend": null
+    },
+    "tooltip": [ 
+      {"field": "type", "type": "nominal"}, 
+      {"field": "consumption", "type": "quantitative", "format": ".2f"}
+      ]
+  }
+  }
