@@ -1,0 +1,153 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 400,
+  "background": "#fcf9f0",
+  "title": {"text": ["2018 Alcohol Consumption per capita vs. GDP per capita"],
+  "fontSize":17,
+  "color":"#c5a516c2"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/Yino111/yino/main/3179_assignment2%20/data/2018_alcohol_consumption_data.csv"
+  },
+  "params": [
+    {
+      "name": "Population_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100000000,
+        "step": 1000000,
+        "name": "Minimum Population: "
+      }
+    },
+    {
+      "name": "Continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "labels":[
+          "Show All",
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "name": "Continent Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.Population > Population_Above"},
+    {"filter": "Continent_selection == null || datum.Continent == Continent_selection"} 
+  ],
+  "encoding": {
+    "x": {
+      "field": "GDP",
+      "type": "quantitative",
+      "title": "GDP per capita",
+      "axis": {"tickCount": 6},
+      "scale": { "domain": [1, 120000]}
+    },
+    "y": {
+      "field": "Consumption",
+      "type": "quantitative",
+      "title": "Alcohol consumption (litres per capita)",
+      "axis": {"tickCount": 6},
+      "scale": { "domain": [0, 18]}
+    }
+  },
+  "layer": [
+    {
+      "selection": {
+        "continent_highlight": {
+          "type": "multi",
+          "fields": ["Continent"],
+          "bind": "legend"
+        }
+      },
+      "mark": "circle",
+      "encoding": {
+        "size": {
+          "field": "Population",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [100000, 10000000, 50000000, 100000000, 500000000],
+            "range": [10, 50, 150, 200, 300, 400]
+          },
+          "legend": {"format": ".1s"}
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "North America",
+              "South America",
+              "Europe",
+              "Africa",
+              "Asia",
+              "Oceania"
+            ],
+            "range": [
+              "#e41a1c",
+              "#984ea3",
+              "#ff7f00",
+              "#a6cee3",
+              "#377eb8",
+              "#a65628"
+            ]
+          }
+        },
+        "opacity": {
+          "condition": {"selection": "continent_highlight", "value": 0.6},
+          "value": 0.2
+        },
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {"field": "Consumption", "type": "quantitative", "format": ","},
+          {"field": "GDP", "type": "quantitative", "format": ".0f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "Country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Country'] == 'Luxembourg' || datum['Country'] == 'Singapore' || datum['Country'] == 'Ireland' || datum['Country'] == 'Norway' || datum['Country'] == 'Turkey' || datum['Country'] == 'Czechia' ||  datum['Country'] == 'Cuba'|| datum['Country'] == 'Japan'|| datum['Country'] == 'Australia'",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {"field": "Consumption", "type": "quantitative", "format": ","},
+          {"field": "GDP", "type": "quantitative", "format": ".2f"}
+          
+        ]
+      }
+    }
+  ]
+}
